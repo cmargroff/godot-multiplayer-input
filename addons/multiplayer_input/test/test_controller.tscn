@@ -1,8 +1,44 @@
 [gd_scene format=3 uid="uid://b86hjrxbq08hy"]
 
-[node name="TestController" type="AspectRatioContainer" unique_id=184144254]
+[ext_resource type="Texture2D" uid="uid://cmypjahgxcj82" path="res://addons/multiplayer_input/test/assets/controller.svg" id="1_41225"]
+[ext_resource type="Script" uid="uid://bicn1lmbknuu1" path="res://addons/multiplayer_input/test/TestController.cs" id="1_lw78l"]
+
+[node name="TestController" type="AspectRatioContainer" unique_id=184144254 node_paths=PackedStringArray("ControllerBase", "ControllerLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lw78l")
+ControllerBase = NodePath("Control/ControllerBase")
+ControllerLabel = NodePath("Control/ControllerBase/Label")
+
+[node name="Control" type="Control" parent="." unique_id=1161530611]
+layout_mode = 2
+
+[node name="ControllerBase" type="TextureRect" parent="Control" unique_id=1564796836]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -350.0
+offset_right = 350.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(350, 350)
+texture = ExtResource("1_41225")
+
+[node name="Label" type="Label" parent="Control/ControllerBase" unique_id=1361231491]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 530.0
+offset_right = 487.0
+offset_bottom = 634.0
+theme_override_font_sizes/font_size = 32
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
