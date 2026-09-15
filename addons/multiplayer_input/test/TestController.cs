@@ -1,5 +1,7 @@
 using Godot;
 
+namespace GodotMultiplayerInput;
+
 public partial class TestController : Control
 {
   [Export] private TextureRect ControllerBase;
