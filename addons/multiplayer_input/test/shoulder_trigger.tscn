@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://xgwmdocmcquh"]
+
+[ext_resource type="Script" uid="uid://bntmw4a37ub3y" path="res://addons/multiplayer_input/test/ButtonComponent.cs" id="1_vtfu0"]
+[ext_resource type="Texture2D" uid="uid://vhuo3nfe246i" path="res://addons/multiplayer_input/test/assets/ST.svg" id="2_a36ye"]
+[ext_resource type="Texture2D" uid="uid://c0sb4eghsnm16" path="res://addons/multiplayer_input/test/assets/ST_fill.svg" id="3_mmkic"]
+
+[node name="ShoulderTrigger" type="Control" unique_id=2109271422]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vtfu0")
+Fill = 1.0
+
+[node name="Clear" type="TextureRect" parent="." unique_id=1574057195]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_a36ye")
+
+[node name="Filled" type="TextureRect" parent="." unique_id=870599088]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_mmkic")
