@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://o2bol4qqjabv"]
 
+[ext_resource type="Script" uid="uid://18mdvm4lbe4e" path="res://addons/multiplayer_input/test/Test.cs" id="1_qh4i5"]
+[ext_resource type="PackedScene" uid="uid://b86hjrxbq08hy" path="res://addons/multiplayer_input/test/test_controller.tscn" id="2_gx4bt"]
+
 [node name="Test" type="GridContainer" unique_id=900764582]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qh4i5")
+TestControllerScene = ExtResource("2_gx4bt")
