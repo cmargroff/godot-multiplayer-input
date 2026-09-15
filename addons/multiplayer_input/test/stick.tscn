@@ -4,30 +4,29 @@
 [ext_resource type="Script" uid="uid://dnwfs07uxeouy" path="res://addons/multiplayer_input/test/StickComponent.cs" id="1_l0dqf"]
 [ext_resource type="Texture2D" uid="uid://dsbgejlgav6c" path="res://addons/multiplayer_input/test/assets/stick_fill.svg" id="2_l0dqf"]
 
-[node name="Stick" type="Control" unique_id=110914259]
+[node name="Stick" type="Control" unique_id=110914259 node_paths=PackedStringArray("_fill")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1056.0
-offset_bottom = -554.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_l0dqf")
-_fillX = 0.665
-_fillY = 0.165
+_fill = NodePath("Filled")
 
 [node name="Clear" type="TextureRect" parent="." unique_id=1540524462]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -48.0
+offset_top = -47.0
+offset_right = 48.0
+offset_bottom = 47.0
+pivot_offset = Vector2(48, 47)
 texture = ExtResource("1_03s21")
 
 [node name="Filled" type="TextureRect" parent="." unique_id=956346530]
 unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 96.0
-offset_bottom = 94.0
+offset_left = -48.0
+offset_top = -47.0
+offset_right = 48.0
+offset_bottom = 47.0
+pivot_offset = Vector2(48, 47)
 texture = ExtResource("2_l0dqf")
