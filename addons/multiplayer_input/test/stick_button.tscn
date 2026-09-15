@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dux2vlh45ueuq"]
+
+[ext_resource type="Script" uid="uid://bntmw4a37ub3y" path="res://addons/multiplayer_input/test/ButtonComponent.cs" id="1_0e7f2"]
+[ext_resource type="Texture2D" uid="uid://cdliiddux5j32" path="res://addons/multiplayer_input/test/assets/stick_dot.svg" id="1_8lneb"]
+[ext_resource type="Texture2D" uid="uid://b2qpvi7f8rrwn" path="res://addons/multiplayer_input/test/assets/stick_dot_fill.svg" id="2_0e7f2"]
+
+[node name="StickButton" type="Control" unique_id=502789942]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1082.0
+offset_bottom = -578.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0e7f2")
+
+[node name="Clear" type="TextureRect" parent="." unique_id=2060210452]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_8lneb")
+
+[node name="Filled" type="TextureRect" parent="." unique_id=1718868663]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_0e7f2")

@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cmypjahgxcj82" path="res://addons/multiplayer_input/test/assets/controller.svg" id="1_41225"]
 [ext_resource type="Script" uid="uid://bicn1lmbknuu1" path="res://addons/multiplayer_input/test/TestController.cs" id="1_lw78l"]
-[ext_resource type="PackedScene" uid="uid://xgwmdocmcquh" path="res://addons/multiplayer_input/test/shoulder_trigger.tscn" id="3_h4e1t"]
 
 [node name="TestController" type="AspectRatioContainer" unique_id=184144254 node_paths=PackedStringArray("ControllerBase", "ControllerLabel")]
 anchors_preset = 15
@@ -45,10 +44,3 @@ theme_override_font_sizes/font_size = 32
 text = "Player 1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ShoulderTrigger" parent="Control" unique_id=2109271422 instance=ExtResource("3_h4e1t")]
-layout_mode = 0
-offset_left = 132.0
-offset_top = 46.0
-offset_right = 172.0
-offset_bottom = 86.0
