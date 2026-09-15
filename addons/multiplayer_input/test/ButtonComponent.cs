@@ -1,23 +1,17 @@
 using Godot;
-using System;
 
 public partial class ButtonComponent : Control
 {
-    // [Export]
-    // private float _fill = 0f;
-    private TextureRect _filled;
-
-    public override void _EnterTree()
+  [Export] private TextureRect _fill;
+  public float Value
+  {
+    get => _fill.Modulate.A;
+    set
     {
-        _filled = GetNode<TextureRect>("%Filled");
-        // ChangeFillOpacity(_fill);
+      var modulate = _fill.Modulate;
+      modulate.A = value;
+      _fill.Modulate = modulate;
     }
-
-    public void ChangeFillOpacity(float value)
-    {
-        var modulate = _filled.SelfModulate;
-        modulate.A = value;
-        _filled.SelfModulate = modulate;
-    }
+  }
 
 }
