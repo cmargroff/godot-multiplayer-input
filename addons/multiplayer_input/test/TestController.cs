@@ -16,12 +16,33 @@ public partial class TestController : Control
   [Export] private ButtonComponent ShoulderRight;
   [Export] private ButtonComponent TriggerLeft;
   [Export] private ButtonComponent TriggerRight;
-  public int PlayerId = 0;
   public PlayerInput PlayerInput;
   private Vector2 BaseSize = Vector2.One;
+  private StringName LeftXNeg = "left_x_neg";
+  private StringName LeftXPos = "left_x_pos";
+  private StringName LeftYNeg = "left_y_neg";
+  private StringName LeftYPos = "left_y_pos";
+  private StringName RightXNeg = "right_x_neg";
+  private StringName RightXPos = "right_x_pos";
+  private StringName RightYNeg = "right_y_neg";
+  private StringName RightYPos = "right_y_pos";
+  private StringName North = "north";
+  private StringName South = "south";
+  private StringName East = "east";
+  private StringName West = "west";
+  private StringName DPadNorth = "dpad_north";
+  private StringName DPadSouth = "dpad_south";
+  private StringName DPadEast = "dpad_east";
+  private StringName DPadWest = "dpad_west";
+  private StringName MetaLeftAction = "meta_left";
+  private StringName MetaRightAction = "meta_right";
+  private StringName ShoulderLeftAction = "shoulder_left";
+  private StringName ShoulderRightAction = "shoulder_right";
+  private StringName TriggerLeftAction = "trigger_left";
+  private StringName TriggerRightAction = "trigger_right";
   public override void _EnterTree()
   {
-    ControllerLabel.Text = $"Player {PlayerId + 1}";
+    ControllerLabel.Text = $"Player {PlayerInput.PlayerId + 1}";
   }
   public override void _Ready()
   {
@@ -41,27 +62,30 @@ public partial class TestController : Control
   }
   public override void _Process(double delta)
   {
-    ControllerStick.Value = PlayerInput.GetVector("left_x_neg", "left_x_pos", "left_y_neg", "left_y_pos");
-    ControllerStick2.Value = PlayerInput.GetVector("right_x_neg", "right_x_pos", "right_y_neg", "right_y_pos");
+    var start = Time.GetTicksUsec();
+    ControllerStick.Value = PlayerInput.GetVector(LeftXNeg, LeftXPos, LeftYNeg, LeftYPos);
+    ControllerStick2.Value = PlayerInput.GetVector(RightXNeg, RightXPos, RightYNeg, RightYPos);
     FaceButtons.ButtonValues = new float[]
     {
-          PlayerInput.GetActionStrength("north"),
-          PlayerInput.GetActionStrength("south"),
-          PlayerInput.GetActionStrength("east"),
-          PlayerInput.GetActionStrength("west")
+          PlayerInput.GetActionStrength(North),
+          PlayerInput.GetActionStrength(South),
+          PlayerInput.GetActionStrength(East),
+          PlayerInput.GetActionStrength(West)
     };
     DPad.ButtonValues = new float[]
     {
-          PlayerInput.GetActionStrength("dpad_north"),
-          PlayerInput.GetActionStrength("dpad_south"),
-          PlayerInput.GetActionStrength("dpad_east"),
-          PlayerInput.GetActionStrength("dpad_west")
+          PlayerInput.GetActionStrength(DPadNorth),
+          PlayerInput.GetActionStrength(DPadSouth),
+          PlayerInput.GetActionStrength(DPadEast),
+          PlayerInput.GetActionStrength(DPadWest)
     };
-    MetaLeft.Value = PlayerInput.GetActionStrength("meta_left");
-    MetaRight.Value = PlayerInput.GetActionStrength("meta_right");
-    ShoulderLeft.Value = PlayerInput.GetActionStrength("shoulder_left");
-    ShoulderRight.Value = PlayerInput.GetActionStrength("shoulder_right");
-    TriggerLeft.Value = PlayerInput.GetActionStrength("trigger_left");
-    TriggerRight.Value = PlayerInput.GetActionStrength("trigger_right");
+    MetaLeft.Value = PlayerInput.GetActionStrength(MetaLeftAction);
+    MetaRight.Value = PlayerInput.GetActionStrength(MetaRightAction);
+    ShoulderLeft.Value = PlayerInput.GetActionStrength(ShoulderLeftAction);
+    ShoulderRight.Value = PlayerInput.GetActionStrength(ShoulderRightAction);
+    TriggerLeft.Value = PlayerInput.GetActionStrength(TriggerLeftAction);
+    TriggerRight.Value = PlayerInput.GetActionStrength(TriggerRightAction);
+    var end = Time.GetTicksUsec();
+    GD.Print($"Process Time p{PlayerInput.PlayerId}: {end - start} usec");
   }
 }
