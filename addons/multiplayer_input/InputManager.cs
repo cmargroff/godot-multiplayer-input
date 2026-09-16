@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
 namespace GodotMultiplayerInput;
 
-public class InputManager : IInputManager
+public class InputManager : IInputManager, IDisposable
 {
 
   private Dictionary<string, InputBinding> InputMap;
   private const string InputSection = "input";
+  private Dictionary<int, PlayerInput> PlayerInputs = new Dictionary<int, PlayerInput>();
   public void ParseMap(string filePath = "res://project.godot")
   {
     var settings_file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
@@ -25,6 +27,26 @@ public class InputManager : IInputManager
   }
   public PlayerInput GetPlayer(int playerId)
   {
-    return new PlayerInput(playerId, InputMap);
+    if (!PlayerInputs.ContainsKey(playerId))
+    {
+      PlayerInputs[playerId] = new PlayerInput(playerId, InputMap);
+    }
+    return PlayerInputs[playerId];
+  }
+  public void RemovePlayer(int playerId)
+  {
+    if (PlayerInputs.ContainsKey(playerId))
+    {
+      PlayerInputs[playerId].Dispose();
+      PlayerInputs.Remove(playerId);
+    }
+  }
+  public void Dispose()
+  {
+    foreach (var playerInput in PlayerInputs.Values)
+    {
+      playerInput.Dispose();
+    }
+    PlayerInputs.Clear();
   }
 }
