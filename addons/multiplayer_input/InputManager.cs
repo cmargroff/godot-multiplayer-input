@@ -6,10 +6,22 @@ namespace GodotMultiplayerInput;
 
 public class InputManager : IInputManager, IDisposable
 {
-
   private Dictionary<string, InputBinding> InputMap;
   private const string InputSection = "input";
   private Dictionary<int, PlayerInput> PlayerInputs = new Dictionary<int, PlayerInput>();
+  public InputManager()
+  {
+    Input.JoyConnectionChanged += OnJoyConnectionChanged;
+  }
+
+  private void OnJoyConnectionChanged(long deviceId, bool connected)
+  {
+    if (!PlayerInputs.ContainsKey((int)deviceId))
+    {
+      return;
+    }
+    PlayerInputs[(int)deviceId].EmitPlayerConnectedEvent(connected);
+  }
   public void ParseMap(string filePath = "res://project.godot")
   {
     var settings_file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);

@@ -8,6 +8,7 @@ public class PlayerInput : IDisposable
 {
   public int PlayerId { get; private set; }
   public Dictionary<string, InputBinding> Bindings { get; private set; }
+  public event Action<bool> ConnectionStateChanged;
   private Dictionary<StringName, StringName> ActionNameMap = new();
 
   public PlayerInput(int playerId, Dictionary<string, InputBinding> bindings)
@@ -99,5 +100,9 @@ public class PlayerInput : IDisposable
     var upName = ActionNameMap.TryGetValue(up, out var upScoped) ? upScoped : up;
     var downName = ActionNameMap.TryGetValue(down, out var downScoped) ? downScoped : down;
     return Input.GetVector(upName, downName, leftName, rightName);
+  }
+  internal void EmitPlayerConnectedEvent(bool connected)
+  {
+    ConnectionStateChanged?.Invoke(connected);
   }
 }
