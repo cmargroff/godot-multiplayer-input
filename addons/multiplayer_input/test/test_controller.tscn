@@ -8,6 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://cyhemtow1j0us" path="res://addons/multiplayer_input/test/components/shoulder_button.tscn" id="6_hyxkc"]
 [ext_resource type="PackedScene" uid="uid://xgwmdocmcquh" path="res://addons/multiplayer_input/test/components/shoulder_trigger.tscn" id="7_pxcox"]
 
+[sub_resource type="Gradient" id="Gradient_hyxkc"]
+offsets = PackedFloat32Array(0, 0.4698795, 0.5903614, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rhud3"]
+gradient = SubResource("Gradient_hyxkc")
+
 [node name="TestController" type="AspectRatioContainer" unique_id=184144254 node_paths=PackedStringArray("ControllerBase", "ControllerLabel", "ControllerStick", "ControllerStick2", "FaceButtons", "DPad", "MetaLeft", "MetaRight", "ShoulderLeft", "ShoulderRight", "TriggerLeft", "TriggerRight")]
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,3 +136,28 @@ offset_left = 522.0
 offset_top = 89.0
 offset_right = 522.0
 offset_bottom = 89.0
+
+[node name="DisconnectedBanner" type="VBoxContainer" parent="." unique_id=1932075270]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="BoxContainer" type="MarginContainer" parent="DisconnectedBanner" unique_id=1035295699]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="DisconnectedBanner/BoxContainer" unique_id=460798234]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_rhud3")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DisconnectedBanner/BoxContainer" unique_id=459226520]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="DisconnectedBanner/BoxContainer/MarginContainer" unique_id=1978254757]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Disconnected"
+horizontal_alignment = 1
+vertical_alignment = 1
