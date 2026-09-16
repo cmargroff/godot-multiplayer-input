@@ -6,6 +6,7 @@ public partial class TestController : Control
 {
   [Export] private TextureRect ControllerBase;
   [Export] private Label ControllerLabel;
+  [Export] private Label DeviceNameLabel;
   [Export] private Control DisconnectedBanner;
   [Export] private StickComponent ControllerStick;
   [Export] private StickComponent ControllerStick2;
@@ -99,5 +100,13 @@ public partial class TestController : Control
     IsDeviceConnected = connected;
     // handle connection state changes if necessary
     DisconnectedBanner.Visible = !IsDeviceConnected;
+    if (IsDeviceConnected)
+    {
+      UpdateDeviceName();
+    }
+  }
+  private void UpdateDeviceName()
+  {
+    DeviceNameLabel.Text = PlayerInput.DeviceName;
   }
 }

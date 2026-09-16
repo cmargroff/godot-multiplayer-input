@@ -10,11 +10,13 @@ public class PlayerInput : IDisposable
   public Dictionary<string, InputBinding> Bindings { get; private set; }
   public event Action<bool> ConnectionStateChanged;
   private Dictionary<StringName, StringName> ActionNameMap = new();
+  public string DeviceName { get; private set; }
 
   public PlayerInput(int playerId, Dictionary<string, InputBinding> bindings)
   {
     PlayerId = playerId;
     Bindings = ScopeInputBindings(bindings);
+    UpdateDeviceName();
     RegisterInputBindings();
   }
   private Dictionary<string, InputBinding> ScopeInputBindings(Dictionary<string, InputBinding> bindings)
@@ -104,5 +106,13 @@ public class PlayerInput : IDisposable
   internal void EmitPlayerConnectedEvent(bool connected)
   {
     ConnectionStateChanged?.Invoke(connected);
+    if (connected)
+    {
+      UpdateDeviceName();
+    }
+  }
+  private void UpdateDeviceName()
+  {
+    DeviceName = Input.GetJoyName(PlayerId);
   }
 }
