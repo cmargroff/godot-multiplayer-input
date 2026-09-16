@@ -1,0 +1,24 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Game",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "args": ["--verbose"],
+      "cwd": "${workspaceRoot}",
+      "console": "internalConsole",
+      "stopAtEntry": false,
+      "windows": {
+        "program": "${env:GODOT_HOME}/Godot_v4.7-stable_mono_win64.exe",
+      },
+      "linux": {
+        "program": "godot",
+      }
+    }
+  ]
+}
