@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace GodotMultiplayerInput;
@@ -7,6 +8,7 @@ public partial class Test : GridContainer
 {
   [Export] private PackedScene TestControllerScene;
   private InputManager inputManager = new InputManager();
+  private List<int> playerIds = new List<int>();
   public override void _Ready()
   {
     inputManager.ParseMap("res://addons/multiplayer_input/test/inputmap.cfg");
@@ -18,8 +20,14 @@ public partial class Test : GridContainer
     {
       if (TestControllerScene != null)
       {
+        if (playerIds.Contains((int)deviceId))
+        {
+          return;
+        }
         var controller = TestControllerScene.Instantiate<TestController>();
-        controller.PlayerInput = inputManager.GetPlayer((int)deviceId);
+        var playerInput = inputManager.GetPlayer((int)deviceId);
+        playerIds.Add((int)deviceId);
+        controller.PlayerInput = playerInput;
         AddChild(controller);
         var childCount = GetChildren().Count;
         if (childCount < 4)
