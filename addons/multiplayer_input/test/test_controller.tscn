@@ -49,6 +49,17 @@ grow_vertical = 2
 pivot_offset = Vector2(350, 350)
 texture = ExtResource("1_41225")
 
+[node name="Label" type="Label" parent="Control/ControllerBase" unique_id=1361231491]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 530.0
+offset_right = 487.0
+offset_bottom = 634.0
+theme_override_font_sizes/font_size = 32
+text = "Player 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Stick" parent="Control/ControllerBase" unique_id=110914259 instance=ExtResource("3_h4e1t")]
 layout_mode = 0
 offset_left = 179.0
@@ -62,17 +73,6 @@ offset_left = 442.0
 offset_top = 408.0
 offset_right = 442.0
 offset_bottom = 408.0
-
-[node name="Label" type="Label" parent="Control/ControllerBase" unique_id=1361231491]
-layout_mode = 0
-offset_left = 213.0
-offset_top = 530.0
-offset_right = 487.0
-offset_bottom = 634.0
-theme_override_font_sizes/font_size = 32
-text = "Player 1"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CrossButtons" parent="Control/ControllerBase" unique_id=1396279216 instance=ExtResource("4_5nu7d")]
 layout_mode = 0

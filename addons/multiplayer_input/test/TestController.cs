@@ -36,7 +36,7 @@ public partial class TestController : Control
   {
     // this will update the controller base size
     // all controls should be relative to the base by parenting and inherit the transformation matrix
-    var minScale = Mathf.Min(BaseSize.X / Size.X, BaseSize.Y / Size.Y);
+    var minScale = Mathf.Min(Size.X / BaseSize.X, Size.Y / BaseSize.Y);
     ControllerBase.Scale = new Vector2(minScale, minScale);
   }
   public override void _Process(double delta)
