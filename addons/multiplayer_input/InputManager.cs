@@ -6,6 +6,10 @@ namespace GodotMultiplayerInput;
 
 public class InputManager : IInputManager, IDisposable
 {
+  public event Action<PlayerInput> PlayerConnected;
+  public event Action<PlayerInput> PlayerDisconnected;
+  public event Action<PlayerInput> PlayerReconnected;
+  public event Action<int> PlayerRemoved;
   private Dictionary<string, InputBinding> InputMap;
   private const string InputSection = "input";
   private Dictionary<int, PlayerInput> PlayerInputs = new Dictionary<int, PlayerInput>();
@@ -16,11 +20,21 @@ public class InputManager : IInputManager, IDisposable
 
   private void OnJoyConnectionChanged(long deviceId, bool connected)
   {
-    if (!PlayerInputs.ContainsKey((int)deviceId))
+    if (!connected && PlayerInputs.ContainsKey((int)deviceId))
     {
+      PlayerReconnected?.Invoke(GetPlayer((int)deviceId));
       return;
     }
-    PlayerInputs[(int)deviceId].EmitPlayerConnectedEvent(connected);
+    var player = GetPlayer((int)deviceId);
+    if (connected)
+    {
+      PlayerConnected?.Invoke(player);
+    }
+    else
+    {
+      PlayerDisconnected?.Invoke(player);
+    }
+    player.EmitPlayerConnectedEvent(connected);
   }
   public void ParseMap(string filePath = "res://project.godot")
   {
@@ -51,6 +65,7 @@ public class InputManager : IInputManager, IDisposable
     {
       PlayerInputs[playerId].Dispose();
       PlayerInputs.Remove(playerId);
+      PlayerRemoved?.Invoke(playerId);
     }
   }
   public void Dispose()
