@@ -20,9 +20,10 @@ public class InputManager : IInputManager, IDisposable
 
   private void OnJoyConnectionChanged(long deviceId, bool connected)
   {
-    if (!connected && PlayerInputs.ContainsKey((int)deviceId))
+    if (connected && PlayerInputs.ContainsKey((int)deviceId))
     {
       PlayerReconnected?.Invoke(GetPlayer((int)deviceId));
+      PlayerInputs[(int)deviceId].EmitPlayerConnectedEvent(true);
       return;
     }
     var player = GetPlayer((int)deviceId);

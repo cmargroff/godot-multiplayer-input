@@ -6,6 +6,7 @@ public partial class TestController : Control
 {
   [Export] private TextureRect ControllerBase;
   [Export] private Label ControllerLabel;
+  [Export] private Control DisconnectedBanner;
   [Export] private StickComponent ControllerStick;
   [Export] private StickComponent ControllerStick2;
   [Export] private CrossButtonsComponent FaceButtons;
@@ -40,9 +41,11 @@ public partial class TestController : Control
   private StringName ShoulderRightAction = "shoulder_right";
   private StringName TriggerLeftAction = "trigger_left";
   private StringName TriggerRightAction = "trigger_right";
+  private bool IsDeviceConnected = true;
   public override void _EnterTree()
   {
     ControllerLabel.Text = $"Player {PlayerInput.PlayerId + 1}";
+    PlayerInput.ConnectionStateChanged += ConnectionStateChanged;
   }
   public override void _Ready()
   {
@@ -62,6 +65,10 @@ public partial class TestController : Control
   }
   public override void _Process(double delta)
   {
+    if (!IsDeviceConnected)
+    {
+      return;
+    }
     var start = Time.GetTicksUsec();
     ControllerStick.Value = PlayerInput.GetVector(LeftXNeg, LeftXPos, LeftYNeg, LeftYPos);
     ControllerStick2.Value = PlayerInput.GetVector(RightXNeg, RightXPos, RightYNeg, RightYPos);
@@ -86,6 +93,11 @@ public partial class TestController : Control
     TriggerLeft.Value = PlayerInput.GetActionStrength(TriggerLeftAction);
     TriggerRight.Value = PlayerInput.GetActionStrength(TriggerRightAction);
     var end = Time.GetTicksUsec();
-    GD.Print($"Process Time p{PlayerInput.PlayerId}: {end - start} usec");
+  }
+  private void ConnectionStateChanged(bool connected)
+  {
+    IsDeviceConnected = connected;
+    // handle connection state changes if necessary
+    DisconnectedBanner.Visible = !IsDeviceConnected;
   }
 }

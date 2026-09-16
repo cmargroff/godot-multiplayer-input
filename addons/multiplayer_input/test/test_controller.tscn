@@ -15,7 +15,7 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_rhud3"]
 gradient = SubResource("Gradient_hyxkc")
 
-[node name="TestController" type="AspectRatioContainer" unique_id=184144254 node_paths=PackedStringArray("ControllerBase", "ControllerLabel", "ControllerStick", "ControllerStick2", "FaceButtons", "DPad", "MetaLeft", "MetaRight", "ShoulderLeft", "ShoulderRight", "TriggerLeft", "TriggerRight")]
+[node name="TestController" type="AspectRatioContainer" unique_id=184144254 node_paths=PackedStringArray("ControllerBase", "ControllerLabel", "DisconnectedBanner", "ControllerStick", "ControllerStick2", "FaceButtons", "DPad", "MetaLeft", "MetaRight", "ShoulderLeft", "ShoulderRight", "TriggerLeft", "TriggerRight")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,6 +26,7 @@ size_flags_vertical = 3
 script = ExtResource("1_lw78l")
 ControllerBase = NodePath("Control/ControllerBase")
 ControllerLabel = NodePath("Control/ControllerBase/Label")
+DisconnectedBanner = NodePath("DisconnectedBanner")
 ControllerStick = NodePath("Control/ControllerBase/Stick")
 ControllerStick2 = NodePath("Control/ControllerBase/Stick2")
 FaceButtons = NodePath("Control/ControllerBase/CrossButtons")
