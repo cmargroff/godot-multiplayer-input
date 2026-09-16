@@ -17,6 +17,7 @@ public partial class TestController : Control
   [Export] private ButtonComponent TriggerLeft;
   [Export] private ButtonComponent TriggerRight;
   public int PlayerId = 0;
+  public PlayerInput PlayerInput;
   private Vector2 BaseSize = Vector2.One;
   public override void _EnterTree()
   {
@@ -40,27 +41,27 @@ public partial class TestController : Control
   }
   public override void _Process(double delta)
   {
-    ControllerStick.Value = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-    ControllerStick2.Value = Input.GetVector("look_left", "look_right", "look_up", "look_down");
+    ControllerStick.Value = PlayerInput.GetVector("left_x_neg", "left_x_pos", "left_y_neg", "left_y_pos");
+    ControllerStick2.Value = PlayerInput.GetVector("right_x_neg", "right_x_pos", "right_y_neg", "right_y_pos");
     FaceButtons.ButtonValues = new float[]
     {
-      Input.GetActionStrength("north"),
-      Input.GetActionStrength("south"),
-      Input.GetActionStrength("east"),
-      Input.GetActionStrength("west")
+          PlayerInput.GetActionStrength("north"),
+          PlayerInput.GetActionStrength("south"),
+          PlayerInput.GetActionStrength("east"),
+          PlayerInput.GetActionStrength("west")
     };
     DPad.ButtonValues = new float[]
     {
-      Input.GetActionStrength("dpad_north"),
-      Input.GetActionStrength("dpad_south"),
-      Input.GetActionStrength("dpad_east"),
-      Input.GetActionStrength("dpad_west")
+          PlayerInput.GetActionStrength("dpad_north"),
+          PlayerInput.GetActionStrength("dpad_south"),
+          PlayerInput.GetActionStrength("dpad_east"),
+          PlayerInput.GetActionStrength("dpad_west")
     };
-    MetaLeft.Value = Input.GetActionStrength("meta_left");
-    MetaRight.Value = Input.GetActionStrength("meta_right");
-    ShoulderLeft.Value = Input.GetActionStrength("shoulder_left");
-    ShoulderRight.Value = Input.GetActionStrength("shoulder_right");
-    TriggerLeft.Value = Input.GetActionStrength("trigger_left");
-    TriggerRight.Value = Input.GetActionStrength("trigger_right");
+    MetaLeft.Value = PlayerInput.GetActionStrength("meta_left");
+    MetaRight.Value = PlayerInput.GetActionStrength("meta_right");
+    ShoulderLeft.Value = PlayerInput.GetActionStrength("shoulder_left");
+    ShoulderRight.Value = PlayerInput.GetActionStrength("shoulder_right");
+    TriggerLeft.Value = PlayerInput.GetActionStrength("trigger_left");
+    TriggerRight.Value = PlayerInput.GetActionStrength("trigger_right");
   }
 }

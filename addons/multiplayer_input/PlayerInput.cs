@@ -8,6 +8,7 @@ public class PlayerInput : IDisposable
 {
   public int PlayerId { get; private set; }
   public Dictionary<string, InputBinding> Bindings { get; private set; }
+  private Dictionary<string, StringName> ActionNameMap = new();
 
   public PlayerInput(int playerId, Dictionary<string, InputBinding> bindings)
   {
@@ -17,12 +18,16 @@ public class PlayerInput : IDisposable
   }
   private Dictionary<string, InputBinding> ScopeInputBindings(Dictionary<string, InputBinding> bindings)
   {
-    var prefixedBindings = new Dictionary<string, InputBinding>();
+    var scopedBindings = new Dictionary<string, InputBinding>();
     foreach (var binding in bindings)
     {
-      var config = binding.Value;
+      var scopedKey = $"p{PlayerId}_{binding.Key}";
+      var newBinding = binding.Value.MemberwiseClone();
+      newBinding.Events.ForEach(e => e.Device = PlayerId);
+      scopedBindings[scopedKey] = newBinding;
+      ActionNameMap[binding.Key] = new StringName(scopedKey);
     }
-    return prefixedBindings;
+    return scopedBindings;
   }
   private void RegisterInputBindings()
   {
@@ -51,4 +56,48 @@ public class PlayerInput : IDisposable
     UnregisterInputBindings();
   }
 
+  public bool IsActionPressed(string action)
+  {
+    if (ActionNameMap.TryGetValue(action, out var scopedAction))
+    {
+      return Input.IsActionPressed(scopedAction);
+    }
+    return false;
+  }
+  public bool IsActionJustPressed(string action)
+  {
+    if (ActionNameMap.TryGetValue(action, out var scopedAction))
+    {
+      return Input.IsActionJustPressed(scopedAction);
+    }
+    return false;
+  }
+  public bool IsActionJustReleased(string action)
+  {
+    if (ActionNameMap.TryGetValue(action, out var scopedAction))
+    {
+      return Input.IsActionJustReleased(scopedAction);
+    }
+    return false;
+  }
+  public float GetActionStrength(string action)
+  {
+    if (ActionNameMap.TryGetValue(action, out var scopedAction))
+    {
+      return Input.GetActionStrength(scopedAction);
+    }
+    return 0f;
+  }
+  public bool HasAction(string action)
+  {
+    return ActionNameMap.ContainsKey(action);
+  }
+  public Vector2 GetVector(StringName up, StringName down, StringName left, StringName right)
+  {
+    var leftName = ActionNameMap.TryGetValue(left, out var leftScoped) ? leftScoped : left;
+    var rightName = ActionNameMap.TryGetValue(right, out var rightScoped) ? rightScoped : right;
+    var upName = ActionNameMap.TryGetValue(up, out var upScoped) ? upScoped : up;
+    var downName = ActionNameMap.TryGetValue(down, out var downScoped) ? downScoped : down;
+    return Input.GetVector(upName, downName, leftName, rightName);
+  }
 }

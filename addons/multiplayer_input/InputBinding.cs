@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -21,5 +22,19 @@ public class InputBinding
         Events.Add(inputEvent);
       }
     }
+  }
+  private InputBinding() { }
+  public new InputBinding MemberwiseClone()
+  {
+    var eventsClone = new List<InputEvent>();
+    foreach (var inputEvent in Events)
+    {
+      eventsClone.Add(inputEvent.Duplicate() as InputEvent);
+    }
+    return new InputBinding
+    {
+      Deadzone = Deadzone,
+      Events = eventsClone
+    };
   }
 }
