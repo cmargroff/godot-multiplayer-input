@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dgo26oyed24iv"]
+
+[ext_resource type="Script" uid="uid://3hkjl3yuy3af" path="res://addons/multiplayer_input/test/components/CrossButtonsComponent.cs" id="1_33miq"]
+[ext_resource type="PackedScene" uid="uid://buqrcrf4ubwo7" path="res://addons/multiplayer_input/test/components/button.tscn" id="2_ppuv3"]
+
+[node name="CrossButtons" type="Control" unique_id=1396279216 node_paths=PackedStringArray("NorthButton", "SouthButton", "EastButton", "WestButton")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_33miq")
+NorthButton = NodePath("North")
+SouthButton = NodePath("South")
+EastButton = NodePath("East")
+WestButton = NodePath("West")
+
+[node name="North" parent="." unique_id=1731621647 instance=ExtResource("2_ppuv3")]
+layout_mode = 0
+offset_top = -32.0
+offset_bottom = -32.0
+
+[node name="West" parent="." unique_id=1096214991 instance=ExtResource("2_ppuv3")]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 32.0
+rotation = 1.5707964
+
+[node name="South" parent="." unique_id=347107230 instance=ExtResource("2_ppuv3")]
+layout_mode = 0
+offset_top = 32.0
+offset_bottom = 32.0
+rotation = 3.1415927
+
+[node name="East" parent="." unique_id=888049876 instance=ExtResource("2_ppuv3")]
+layout_mode = 0
+offset_left = -32.0
+offset_right = -32.0
+rotation = 4.712389
