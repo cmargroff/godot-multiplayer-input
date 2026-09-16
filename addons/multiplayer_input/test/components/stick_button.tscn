@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dux2vlh45ueuq"]
 
-[ext_resource type="Script" uid="uid://bntmw4a37ub3y" path="res://addons/multiplayer_input/test/ButtonComponent.cs" id="1_0e7f2"]
+[ext_resource type="Script" uid="uid://bntmw4a37ub3y" path="res://addons/multiplayer_input/test/components/ButtonComponent.cs" id="1_0e7f2"]
 [ext_resource type="Texture2D" uid="uid://cdliiddux5j32" path="res://addons/multiplayer_input/test/assets/stick_dot.svg" id="1_8lneb"]
 [ext_resource type="Texture2D" uid="uid://b2qpvi7f8rrwn" path="res://addons/multiplayer_input/test/assets/stick_dot_fill.svg" id="2_0e7f2"]
 
