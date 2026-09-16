@@ -8,7 +8,7 @@ public class PlayerInput : IDisposable
 {
   public int PlayerId { get; private set; }
   public Dictionary<string, InputBinding> Bindings { get; private set; }
-  private Dictionary<string, StringName> ActionNameMap = new();
+  private Dictionary<StringName, StringName> ActionNameMap = new();
 
   public PlayerInput(int playerId, Dictionary<string, InputBinding> bindings)
   {
@@ -56,7 +56,7 @@ public class PlayerInput : IDisposable
     UnregisterInputBindings();
   }
 
-  public bool IsActionPressed(string action)
+  public bool IsActionPressed(StringName action)
   {
     if (ActionNameMap.TryGetValue(action, out var scopedAction))
     {
@@ -64,7 +64,7 @@ public class PlayerInput : IDisposable
     }
     return false;
   }
-  public bool IsActionJustPressed(string action)
+  public bool IsActionJustPressed(StringName action)
   {
     if (ActionNameMap.TryGetValue(action, out var scopedAction))
     {
@@ -72,7 +72,7 @@ public class PlayerInput : IDisposable
     }
     return false;
   }
-  public bool IsActionJustReleased(string action)
+  public bool IsActionJustReleased(StringName action)
   {
     if (ActionNameMap.TryGetValue(action, out var scopedAction))
     {
@@ -80,7 +80,7 @@ public class PlayerInput : IDisposable
     }
     return false;
   }
-  public float GetActionStrength(string action)
+  public float GetActionStrength(StringName action)
   {
     if (ActionNameMap.TryGetValue(action, out var scopedAction))
     {
@@ -88,7 +88,7 @@ public class PlayerInput : IDisposable
     }
     return 0f;
   }
-  public bool HasAction(string action)
+  public bool HasAction(StringName action)
   {
     return ActionNameMap.ContainsKey(action);
   }
